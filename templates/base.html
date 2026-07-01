@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Treville Modern Schools — Nung Uyo Idoro{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div id="top"></div>
+
+<div class="intro-splash" id="introSplash">
+  <img class="intro-crest" src="{% static 'images/logo.png' %}" alt="" onerror="this.onerror=null;this.classList.add('img-fallback');this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2214%22 fill=%22%23103E58%22/><text x=%2250%22 y=%2261%22 font-family=%22Georgia,serif%22 font-weight=%22700%22 font-size=%2232%22 fill=%22%23E3C170%22 text-anchor=%22middle%22>TMS</text></svg>'">
+  <h1 class="intro-title">Treville Modern Schools</h1>
+  <div class="intro-flourish"><span></span><i></i><span class="right"></span></div>
+  <p class="intro-tagline">Nung Uyo Idoro</p>
+</div>
+
+<header id="siteHeader">
+  <div class="wrap nav-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="brand">
+      <img class="crest" src="{% static 'images/logo.png' %}" alt="Treville Modern Schools crest" style="width:38px; height:auto;" onerror="this.onerror=null;this.classList.add('img-fallback');this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2214%22 fill=%22%23103E58%22/><text x=%2250%22 y=%2261%22 font-family=%22Georgia,serif%22 font-weight=%22700%22 font-size=%2232%22 fill=%22%23E3C170%22 text-anchor=%22middle%22>TMS</text></svg>'">
+      <div class="brand-name">Treville Modern Schools<span>Nung Uyo Idoro</span></div>
+    </div>
+    <a href="#admissions" class="btn btn-gold nav-apply" style="padding:10px 22px; font-size:0.85rem;">Apply Now</a>
+  </div>
+</header>
+
+<div class="nav-overlay" id="navOverlay">
+  <nav class="overlay-links">
+    <a href="#top" data-close>Home</a>
+    <a href="#about" data-close>About</a>
+    <a href="#admissions" data-close>Admissions</a>
+    <a href="#gallery" data-close>Gallery</a>
+    <a href="#news" data-close>News</a>
+    <a href="#contact" data-close>Contact</a>
+  </nav>
+</div>
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img class="crest" src="{% static 'images/logo.png' %}" alt="Treville Modern Schools crest" onerror="this.onerror=null;this.classList.add('img-fallback');this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2214%22 fill=%22%23103E58%22/><text x=%2250%22 y=%2261%22 font-family=%22Georgia,serif%22 font-weight=%22700%22 font-size=%2232%22 fill=%22%23E3C170%22 text-anchor=%22middle%22>TMS</text></svg>'">
+        <div class="brand-name">Treville Modern Schools<span>Nung Uyo Idoro</span></div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="#about">About</a>
+          <a href="#admissions">Admissions</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#news">News</a>
+        </div>
+        <div class="footer-col">
+          <h5>Reach Us</h5>
+          <p>Nung Uyo Idoro, Akwa Ibom</p>
+          <p>+234 803 504 9876 / +234 812 432 6803</p>
+          <p>trevilleschools25@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> Treville Modern Schools. All rights reserved.</span>
+      <a href="/admin/">Staff Login</a>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
