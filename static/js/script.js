@@ -11,7 +11,7 @@
         splash.classList.add('hide');
         document.body.classList.remove('intro-active');
         setTimeout(()=> splash.remove(), 700);
-      }, 3000);
+      }, 4200);
     }
   }
 
