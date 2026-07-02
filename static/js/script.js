@@ -49,7 +49,8 @@
   }
 
   if(menuToggle && navOverlay){
-    menuToggle.addEventListener('click', ()=>{
+    menuToggle.addEventListener('click', (e)=>{
+      e.stopPropagation();
       navOverlay.classList.contains('open') ? closeMenu() : openMenu();
     });
     navOverlay.querySelectorAll('[data-close]').forEach(link=>{
@@ -57,6 +58,13 @@
     });
     document.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape') closeMenu();
+    });
+    document.addEventListener('click', (e)=>{
+      if(navOverlay.classList.contains('open') &&
+         !navOverlay.contains(e.target) &&
+         !menuToggle.contains(e.target)){
+        closeMenu();
+      }
     });
   }
 

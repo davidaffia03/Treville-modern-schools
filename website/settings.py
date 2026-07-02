@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-this-in-production')
 
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'  # MUST be True while developing
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']   
 
@@ -126,7 +126,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
