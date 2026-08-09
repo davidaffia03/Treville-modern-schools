@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About the Owner | Treville Modern Schools{% endblock %}
+
+{% block content %}
+<section class="owner-hero">
+  <div class="hero-bg-glow"></div>
+  <div class="wrap">
+    <h1>A Legacy of Excellence</h1>
+    <p class="owner-subtitle">The Vision Behind Treville Modern Schools</p>
+  </div>
+</section>
+
+<div class="portrait-float-wrapper">
+  <div class="portrait-float">
+    <img src="{% static 'images/owner.jpg' %}" alt="Founder of Treville Modern Schools">
+  </div>
+</div>
+
+<section class="owner-profile">
+  <div class="wrap">
+    <div class="owner-bio reveal">
+      <p class="owner-tagline">Founder &amp; Proprietor</p>
+      <h2>Meet the Founder</h2>
+      <p>Mrs. Aniekan Affia brings to Treville Modern Schools a rare blend of legal precision, administrative expertise, and pedagogical insight. She holds a Masters Degree in Public Administration , A Bachelor Of Laws Degree and went on to acquire a Post Graduate diploma in education / This was to fully equip her for school administration and management. A combination that has shaped her approach to running an institution built on structure, accountability, and academic excellence.</p>
+      <p>It was this multidisciplinary foundation that inspired the establishment of Treville Modern Schools: a conviction that quality education requires not just passion, but sound governance, disciplined systems, and a deep understanding of how young minds are best guided toward excellence. Her legal training instills in the school a culture of order and integrity; her background in public administration ensures efficient, transparent management; and her education qualification keeps her firmly rooted in the realities of the classroom and the needs of every learner.</p>
+      <p>Under her leadership, Treville Modern Schools has grown into a trusted name in Nung Uyo Idoro, offering quality Nursery, Primary, and Secondary education distinguished by discipline, innovation, and an unwavering commitment to producing well-rounded, academically outstanding students.</p>
+      <blockquote>
+        "Education is both a discipline and a responsibility. At Treville, we hold ourselves to the same standard of excellence we expect from every child who walks through our gates."
+        <br><strong>— Mrs. Aniekan Affia, ,MPA, LL.B, PGDE</strong><br>
+        Founder &amp; Proprietor
+      </blockquote>
+    </div>
+  </div>
+</section>
+{% endblock %}

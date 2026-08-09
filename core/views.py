@@ -24,3 +24,5 @@ def home(request):
         "news_items": NewsEvent.objects.all()[:6],
     }
     return render(request, "home.html", context)
+def about_owner(request):
+    return render(request, 'about_owner.html')

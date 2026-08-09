@@ -21,12 +21,6 @@
     header.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // ---------- Reveal on scroll ----------
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:0.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
   // ---------- Footer year ----------
   const yr = document.getElementById('yr');
   if(yr) yr.textContent = new Date().getFullYear();
@@ -82,4 +76,92 @@
       setTimeout(()=> circle.remove(), 600);
     });
   });
+})();
+
+// ---------- Scroll progress bar ----------
+const progressBar = document.createElement('div');
+progressBar.id = 'scrollProgress';
+document.body.appendChild(progressBar);
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrolled = (scrollTop / docHeight) * 100;
+  progressBar.style.width = scrolled + '%';
+});
+
+// ---------- Reveal sections/cards on scroll, staggered ----------
+const revealEls = document.querySelectorAll('.reveal, .box-reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.target.classList.contains('box-reveal')) {
+      entry.target.style.transitionDelay = '0s';
+    } else {
+      const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+      const index = Array.from(siblings).indexOf(entry.target);
+      const delay = 0.25 + Math.min(index, 6) * 0.08;
+      entry.target.style.transitionDelay = delay + 's';
+    }
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+    } else {
+      entry.target.classList.remove('in');
+    }
+  });
+}, {
+  threshold: 0.15,
+  rootMargin: '0px 0px -60px 0px'
+});
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ---------- Hover-preview scroll for same-page nav links ----------
+(function(){
+  const overlayLinks = document.querySelectorAll('#navOverlay .overlay-links a[href*="#"]:not([href*="about-owner"])');
+  let savedScrollY = null;
+  let previewTimeout = null;
+
+  overlayLinks.forEach(link => {
+    const hrefParts = link.getAttribute('href').split('#');
+    const targetId = hrefParts[1];
+    if (!targetId) return;
+
+    link.addEventListener('mouseenter', () => {
+      const targetEl = document.getElementById(targetId);
+      if (!targetEl) return;
+
+      if (savedScrollY === null) {
+        savedScrollY = window.scrollY;
+      }
+
+      clearTimeout(previewTimeout);
+      previewTimeout = setTimeout(() => {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 180);
+    });
+
+    link.addEventListener('mouseleave', () => {
+      clearTimeout(previewTimeout);
+      if (savedScrollY !== null) {
+        previewTimeout = setTimeout(() => {
+          window.scrollTo({ top: savedScrollY, behavior: 'smooth' });
+          savedScrollY = null;
+        }, 180);
+      }
+    });
+
+    link.addEventListener('click', () => {
+      savedScrollY = null;
+      clearTimeout(previewTimeout);
+    });
+  });
+
+  const ownerLink = document.querySelector('#navOverlay .overlay-links a[href*="about-owner"]');
+  if (ownerLink) {
+    ownerLink.addEventListener('mouseenter', () => {
+      clearTimeout(previewTimeout);
+    });
+  }
 })();

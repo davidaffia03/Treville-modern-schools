@@ -165,7 +165,7 @@
 </section>
 <!-- ================= ABOUT ================= -->
 
-<section class="about" id="about">
+<section class="about box-reveal" id="about">
 
     <div class="wrap">
 
@@ -315,7 +315,7 @@
 
 <!-- ================= ADMISSIONS ================= -->
 
-<section class="admissions" id="admissions">
+<section class="admissions box-reveal" id="admissions">
 
     <div class="wrap">
 
@@ -502,7 +502,7 @@
 </section>
 <!-- ================= GALLERY ================= -->
 
-<section class="gallery" id="gallery">
+<section class="gallery box-reveal" id="gallery">
 
     <div class="wrap">
 
@@ -528,11 +528,11 @@
 
         </div>
 
-        <div class="gallery-grid reveal">
+        <div class="gallery-grid">
 
             {% for photo in gallery_photos %}
 
-                <div class="g-tile">
+                <div class="g-tile reveal">
 
                     <img src="{{ photo.image.url }}" alt="{{ photo.caption|default:'Treville Modern Schools' }}">
 
@@ -552,7 +552,7 @@
 
                 {% for i in "123456" %}
 
-                    <div class="g-tile empty">
+                    <div class="g-tile empty reveal">
 
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
 
@@ -584,7 +584,7 @@
 
 <!-- ================= NEWS ================= -->
 
-<section class="news" id="news">
+<section class="news box-reveal" id="news">
 
     <div class="wrap">
 
@@ -745,7 +745,7 @@
 </section>
 <!-- ================= CONTACT ================= -->
 
-<section class="contact" id="contact">
+<section class="contact box-reveal" id="contact">
 
     <div class="wrap">
 

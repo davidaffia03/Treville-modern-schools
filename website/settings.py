@@ -25,14 +25,14 @@ ALLOWED_HOSTS = ['*']
 # ===============================
 
 INSTALLED_APPS = [
-    #...your existing apps stay here...
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',]
+    'core',
+]
 
 
 # ===============================
@@ -134,6 +134,7 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
 # ===============================
 # DEFAULT AUTO FIELD
 # ===============================
