@@ -4,6 +4,8 @@
 # ===============================
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # BASE DIRECTORY (this tells Django where your project lives)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,11 +15,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY SETTINGS
 # ===============================
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-this-in-production')
+# No insecure fallback — if SECRET_KEY isn't set on the host, this
+# raises a clear error instead of silently running with a public default.
+SECRET_KEY = os.environ['SECRET_KEY']
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']   
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 
 # ===============================
@@ -65,13 +69,8 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
-        # 👇 THIS LINE FIXES YOUR HTML NOT LOADING ISSUE
-        'DIRS': [BASE_DIR / "templates"],   # make sure this isn't an empty list []
-        # ...
-
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
-
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -134,6 +133,29 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# ===============================
+# PRODUCTION SECURITY (only active when DEBUG is False)
+# ===============================
+
+if not DEBUG:
+    # Tells Django to trust the proxy's header when it terminates SSL
+    # (needed on Render/Heroku/Railway-style hosts) — without this,
+    # SECURE_SSL_REDIRECT below can cause an infinite redirect loop.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
+    # HSTS — tells browsers to always use HTTPS for this domain.
+    # Only turn this on once you've confirmed HTTPS is working end to end;
+    # it's sticky in the browser and hard to undo quickly if something's wrong.
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 
 # ===============================
 # DEFAULT AUTO FIELD
